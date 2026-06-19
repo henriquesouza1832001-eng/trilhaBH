@@ -1,0 +1,20 @@
+{
+  "appId": "com.trilhabh.app",
+  "appName": "Trilha BH",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowDuration": 2000,
+      "backgroundColor": "#1C0A03",
+      "showSpinner": false
+    },
+    "StatusBar": {
+      "style": "dark",
+      "backgroundColor": "#1C0A03"
+    }
+  }
+}

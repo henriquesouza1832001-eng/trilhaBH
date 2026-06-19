@@ -1,0 +1,21 @@
+{
+  "name": "trilha-bh",
+  "version": "Pré Beta 1.0",
+  "private": true,
+  "author": "Seu Nome <hlmsolucoesesistema@gmail.com>",
+  "license": "UNLICENSED",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "type": "commonjs",
+  "dependencies": {
+    "@capacitor/android": "^8.3.1",
+    "@capacitor/core": "^8.3.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.3.1"
+  }
+}

@@ -1,0 +1,779 @@
+﻿<!DOCTYPE html>
+<!--
+  Trilha BH
+  © 2026 Trilha BH. Todos os direitos reservados.
+  Desenvolvido por Henrique Souza.
+  Versão Pré Beta 1.0 - Maio de 2026
+  Proibida reprodução sem autorização.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self' *.firebaseio.com *.googleapis.com *.gstatic.com cdn.jsdelivr.net unpkg.com fonts.googleapis.com fonts.gstatic.com *.tile.openstreetmap.org api.anthropic.com 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: blob: *.googleapis.com *.gstatic.com *.tile.openstreetmap.org firebasestorage.googleapis.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"/>
+<title>Trilha BH</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="icon" href="images/logo.png"/>
+<link rel="apple-touch-icon" href="images/logo.png"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/regular/style.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/fill/style.min.css"/>
+<meta name="theme-color" content="#E8650A"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<link rel="stylesheet" href="css/app.css"/>
+</script>
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+</head>
+<body>
+<div class="notif" id="notif"></div>
+<div id="politicaOverlay" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);z-index:10000;align-items:center;justify-content:center;padding:20px">
+  <div style="text-align:center;padding:8px;margin-bottom:16px">
+  <div style="font-size:0.7rem;color:#bbb;font-family:'Nunito',sans-serif">Trilha BH · v2.0</div>
+</div>
+  <div style="background:white;border-radius:20px;padding:24px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto;position:relative">
+    <button onclick="document.getElementById('politicaOverlay').style.display='none'" style="position:absolute;top:14px;right:14px;background:none;border:none;font-size:1.3rem;cursor:pointer;color:#888">✕</button>
+    <div style="font-family:'Bebas Neue',cursive;font-size:1.4rem;color:#5C2E00;letter-spacing:1px;margin-bottom:4px"><i class="ph ph-compass"></i> Política de Privacidade</div>
+<div style="font-size:0.72rem;color:#aaa;margin-bottom:16px">Trilha BH · Última atualização: 21 de abril de 2026</div>
+    <div style="font-size:0.82rem;color:#444;line-height:1.6">
+      <p style="font-weight:800;color:#5C2E00;margin-bottom:4px">1. Quem somos</p>
+      <p style="margin-bottom:12px">O Trilha BH é um tour gastronômico colaborativo de Belo Horizonte. Um projeto independente, sem fins lucrativos, feito por quem ama descobrir bares e botequins escondidos pela cidade.</p>
+      <p style="font-weight:800;color:#5C2E00;margin-bottom:4px">2. Dados que coletamos</p>
+      <p style="margin-bottom:4px">Ao criar uma conta, coletamos:</p>
+      <ul style="margin-left:16px;margin-bottom:12px">
+        <li>Nome escolhido por você</li><li>Endereço de e-mail (usado apenas para login)</li>
+        <li>Avatar (emoji ou foto que você escolher e enviar)</li><li>Bares que você marcar como visitados</li>
+        <li>Notas e comentários que você registrar</li><li>Km informados por você</li>
+      </ul>
+      <p style="font-weight:800;color:#5C2E00;margin-bottom:4px">3. Como usamos seus dados</p>
+      <p style="margin-bottom:12px">Seus dados são usados exclusivamente para gerar rankings, estatísticas e o feed de atividades visíveis aos outros participantes do app. Seu e-mail <strong>nunca é exibido</strong> para outros usuários.</p>
+      <p style="font-weight:800;color:#5C2E00;margin-bottom:4px">4. O que é visível para outros usuários</p>
+      <ul style="margin-left:16px;margin-bottom:12px">
+        <li>Seu nome</li><li>Seu avatar ou foto de perfil</li><li>Bares visitados e notas dadas</li>
+        <li>Comentários que você escrever</li><li>Km rodados e estatísticas gerais</li><li>Emblemas conquistados</li>
+      </ul>
+      <p style="font-weight:800;color:#5C2E00;margin-bottom:4px">5. Onde seus dados ficam</p>
+      <p style="margin-bottom:12px">Os dados são armazenados no Google Firebase (Firestore, Authentication e Storage), com servidores nos Estados Unidos. Fotos de perfil e visitas ficam armazenadas no Firebase Storage.</p>
+      <p style="font-weight:800;color:#5C2E00;margin-bottom:4px">6. Seus direitos (LGPD)</p>
+      <ul style="margin-left:16px;margin-bottom:12px">
+        <li>Acessar seus dados a qualquer momento</li><li>Corrigir dados incorretos</li>
+        <li>Excluir sua conta e todos os seus dados incluindo fotos — disponível na aba Perfil</li>
+      </ul>
+      <p style="font-weight:800;color:#5C2E00;margin-bottom:4px">7. Contato</p>
+      <p style="margin-bottom:4px">Dúvidas: <strong>henriquesouza1832001@gmail.com</strong></p>
+    </div>
+    <button onclick="document.getElementById('politicaOverlay').style.display='none'" style="width:100%;margin-top:20px;padding:12px;border-radius:12px;background:#5C2E00;color:white;border:none;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif">Entendi</button>
+  </div>
+</div>
+<div id="loginScreen" class="login-screen">
+  <img src="images/logo.png" style="width:200px;margin-bottom:8px"/>
+  <div class="login-card">
+    <h2 id="loginTitle">entrar</h2>
+    <form id="loginForm" onsubmit="event.preventDefault();window.fazerLogin()" autocomplete="on">
+    <input class="input-field" id="nomeInput" type="text" placeholder="seu nome" style="display:none" autocomplete="name"/>
+    <input class="input-field" id="emailInput" type="email" placeholder="seu@email.com" autocomplete="username"/>
+    <input class="input-field" id="senhaInput" type="password" placeholder="senha" autocomplete="current-password"/>
+    <input class="input-field" id="senha2Input" type="password" placeholder="confirme sua senha" style="display:none" autocomplete="new-password"/>
+    <button type="submit" class="btn-login" id="btnLogin">entrar</button>
+    </form>
+    <button class="btn-cadastro" id="btnCadastro" onclick="window.toggleCadastro()">criar conta</button>
+    <div id="avisoLgpd" style="display:none;font-size:0.72rem;color:#888;text-align:center;margin-top:10px;line-height:1.5">
+      ao criar sua conta você concorda que seu nome e estatísticas serão visíveis aos outros exploradores.
+    </div>
+    <button id="btnReset" onclick="window.abrirResetSenha()" style="background:none;border:none;color:#aaa;font-size:0.75rem;cursor:pointer;font-family:'Nunito',sans-serif;width:100%;text-align:center;margin-bottom:8px;display:none">esqueci minha senha</button>
+    <div class="login-msg" id="loginMsg"></div>
+    <div style="margin-top:16px;text-align:center">
+      <button onclick="document.getElementById('politicaOverlay').style.display='flex'" style="background:none;border:none;color:#bbb;font-size:0.7rem;cursor:pointer;font-family:'Nunito',sans-serif;text-decoration:underline">política de privacidade</button>
+    </div>
+  </div>
+</div>
+
+<div id="splashApp" style="position:fixed;top:0;left:0;right:0;bottom:0;background:linear-gradient(160deg,#1C0A03,#3D1F0F,#5C2E00);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;transition:opacity 0.5s;overflow:hidden">
+  <div id="splashParticulas" style="position:absolute;inset:0;pointer-events:none;overflow:hidden"></div>
+  <img src="images/logo.png" style="width:110px;margin-bottom:28px;position:relative;z-index:2;filter:drop-shadow(0 4px 20px rgba(232,101,10,0.5))"/>
+  <div id="splashCena" style="width:220px;height:180px;position:relative;z-index:2"></div>
+  <div id="splashFrase" style="margin-top:20px;font-family:'Nunito',sans-serif;font-size:0.88rem;font-weight:700;color:rgba(255,255,255,0.75);text-align:center;max-width:260px;line-height:1.5;min-height:44px;position:relative;z-index:2"></div>
+  <div style="margin-top:28px;width:160px;height:3px;background:rgba(255,255,255,0.12);border-radius:4px;overflow:hidden;position:relative;z-index:2">
+    <div id="splashBarra" style="height:100%;width:0%;background:linear-gradient(90deg,#E8650A,#FFB347);border-radius:4px;transition:width 0.4s ease"></div>
+  </div>
+</div>
+
+  <script>
+  (function() {
+    const cont = document.getElementById('splashParticulas');
+    for (let i = 0; i < 18; i++) {
+      const p = document.createElement('div');
+      const sz = 3 + Math.random() * 5;
+      p.style.cssText = `
+        position:absolute;
+        width:${sz}px;height:${sz}px;
+        border-radius:50%;
+        background:rgba(232,101,10,${0.15 + Math.random()*0.25});
+        left:${Math.random()*100}%;
+        top:${Math.random()*100}%;
+        animation:splashFloat ${4+Math.random()*6}s ease-in-out ${Math.random()*4}s infinite alternate;
+      `;
+      cont.appendChild(p);
+    }
+
+    if (!document.getElementById('_splashStyle')) {
+      const s = document.createElement('style');
+      s.id = '_splashStyle';
+      s.textContent = `
+        @keyframes splashFloat {
+          from { transform: translateY(0px) scale(1); opacity:0.4; }
+          to   { transform: translateY(-28px) scale(1.2); opacity:0.9; }
+        }
+        @keyframes splashFadeIn {
+          from { opacity:0; transform:translateY(10px) scale(0.95); }
+          to   { opacity:1; transform:translateY(0) scale(1); }
+        }
+        @keyframes splashFadeOut {
+          from { opacity:1; transform:translateY(0) scale(1); }
+          to   { opacity:0; transform:translateY(-10px) scale(0.95); }
+        }
+        @keyframes splashFraseIn {
+          from { opacity:0; transform:translateY(8px); }
+          to   { opacity:1; transform:translateY(0); }
+        }
+        /* Animações das cenas */
+        @keyframes cervEnche  { from{height:0}  to{height:72px} }
+        @keyframes espumaOsc  { 0%,100%{transform:scaleX(1)} 50%{transform:scaleX(1.06)} }
+        @keyframes torresmoGira{ 0%{transform:rotate(-4deg)} 100%{transform:rotate(4deg)} }
+        @keyframes fumaçaSobe  { 0%{opacity:0;transform:translateY(0) scaleX(1)} 60%{opacity:0.7} 100%{opacity:0;transform:translateY(-28px) scaleX(1.4)} }
+        @keyframes carroMove   { 0%{transform:translateX(0)} 100%{transform:translateX(8px)} }
+        @keyframes pqjIncha    { 0%,100%{transform:scaleY(1)} 50%{transform:scaleY(1.06)} }
+        @keyframes cafeCai     { 0%{transform:translateY(-8px);opacity:0} 60%{opacity:1} 100%{transform:translateY(28px);opacity:0} }
+        @keyframes placaBalanc { 0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(3deg)} }
+        @keyframes bolhaFlutua { 0%{transform:translateY(0) translateX(0)} 50%{transform:translateY(-6px) translateX(3px)} 100%{transform:translateY(0) translateX(0)} }
+      `;
+      document.head.appendChild(s);
+    }
+
+    // ── Cenas ─────────────────────────────────────────────────────
+    const CENAS = [
+
+      // 1. Copo de cerveja enchendo — Lagoinha
+      {
+        frase: 'Enchendo o copo na Lagoinha...',
+        svg: `<svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+          <!-- copo -->
+          <path d="M70 40 L80 150 L140 150 L150 40 Z" fill="none" stroke="#E8650A" stroke-width="3" stroke-linejoin="round"/>
+          <!-- cerveja enchendo -->
+          <clipPath id="copoClip"><path d="M72 42 L81 148 L139 148 L148 42 Z"/></clipPath>
+          <rect x="72" y="78" width="76" height="70" fill="#F5A623" opacity="0.85" clip-path="url(#copoClip)">
+            <animate attributeName="y" from="148" to="78" dur="1.8s" fill="freeze" calcMode="spline" keySplines="0.22 1 0.36 1"/>
+            <animate attributeName="height" from="0" to="70" dur="1.8s" fill="freeze" calcMode="spline" keySplines="0.22 1 0.36 1"/>
+          </rect>
+          <!-- espuma -->
+          <ellipse cx="110" cy="78" rx="37" ry="10" fill="white" opacity="0" clip-path="url(#copoClip)" style="animation:espumaOsc 1.2s ease-in-out infinite">
+            <animate attributeName="opacity" from="0" to="0.92" begin="1.6s" dur="0.3s" fill="freeze"/>
+          </ellipse>
+          <!-- bolhas -->
+          <circle cx="95"  cy="120" r="3" fill="rgba(255,255,255,0.5)" clip-path="url(#copoClip)" style="animation:bolhaFlutua 2s ease-in-out 0.3s infinite"/>
+          <circle cx="115" cy="135" r="2" fill="rgba(255,255,255,0.4)" clip-path="url(#copoClip)" style="animation:bolhaFlutua 2.4s ease-in-out 0.8s infinite"/>
+          <circle cx="105" cy="108" r="2.5" fill="rgba(255,255,255,0.45)" clip-path="url(#copoClip)" style="animation:bolhaFlutua 1.8s ease-in-out 1.2s infinite"/>
+          <!-- alça -->
+          <path d="M148 70 Q168 70 168 95 Q168 120 148 120" fill="none" stroke="#E8650A" stroke-width="3"/>
+          <!-- texto -->
+          <text x="110" y="172" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="13" fill="#E8650A" letter-spacing="2">LAGOINHA</text>
+        </svg>`
+      },
+
+      // 2. Engarrafamento na Afonso Pena
+      {
+        frase: 'Desviando do trânsito da Afonso Pena...',
+        svg: `<svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+          <!-- asfalto -->
+          <rect x="0" y="110" width="220" height="40" fill="#2A2A2A" rx="4"/>
+          <rect x="0" y="128" width="220" height="4" fill="#444"/>
+          <!-- faixas de rua -->
+          <rect x="20"  y="127" width="28" height="5" fill="#F5A623" opacity="0.7" rx="2"/>
+          <rect x="70"  y="127" width="28" height="5" fill="#F5A623" opacity="0.7" rx="2"/>
+          <rect x="122" y="127" width="28" height="5" fill="#F5A623" opacity="0.7" rx="2"/>
+          <rect x="174" y="127" width="28" height="5" fill="#F5A623" opacity="0.7" rx="2"/>
+          <!-- Carro 1 - laranja (o nosso) -->
+          <g style="animation:carroMove 0.6s ease-in-out infinite alternate">
+            <rect x="38" y="85" width="48" height="26" fill="#E8650A" rx="5"/>
+            <rect x="42" y="75" width="36" height="16" fill="#C4500A" rx="4"/>
+            <rect x="44" y="77" width="13" height="12" fill="#87CEEB" opacity="0.7" rx="2"/>
+            <rect x="61" y="77" width="13" height="12" fill="#87CEEB" opacity="0.7" rx="2"/>
+            <circle cx="48"  cy="113" r="7" fill="#1A1A1A"/><circle cx="48"  cy="113" r="3.5" fill="#555"/>
+            <circle cx="78"  cy="113" r="7" fill="#1A1A1A"/><circle cx="78"  cy="113" r="3.5" fill="#555"/>
+            <!-- farol traseiro -->
+            <rect x="38" y="90" width="5" height="8" fill="#FF4444" rx="1" opacity="0.9"/>
+          </g>
+          <!-- Carro 2 - cinza na frente -->
+          <g>
+            <rect x="100" y="86" width="46" height="25" fill="#888" rx="5"/>
+            <rect x="104" y="76" width="34" height="16" fill="#666" rx="4"/>
+            <rect x="106" y="78" width="12" height="11" fill="#87CEEB" opacity="0.6" rx="2"/>
+            <rect x="122" y="78" width="12" height="11" fill="#87CEEB" opacity="0.6" rx="2"/>
+            <circle cx="110" cy="113" r="7" fill="#1A1A1A"/><circle cx="110" cy="113" r="3.5" fill="#555"/>
+            <circle cx="138" cy="113" r="7" fill="#1A1A1A"/><circle cx="138" cy="113" r="3.5" fill="#555"/>
+            <rect x="143" y="90" width="4" height="7" fill="#FF6666" rx="1" opacity="0.8"/>
+          </g>
+          <!-- Carro 3 - marrom -->
+          <g>
+            <rect x="158" y="87" width="44" height="24" fill="#5C3A1E" rx="5"/>
+            <rect x="162" y="78" width="32" height="15" fill="#3D2200" rx="4"/>
+            <rect x="164" y="80" width="11" height="10" fill="#87CEEB" opacity="0.5" rx="2"/>
+            <rect x="179" y="80" width="11" height="10" fill="#87CEEB" opacity="0.5" rx="2"/>
+            <circle cx="168" cy="113" r="7" fill="#1A1A1A"/><circle cx="168" cy="113" r="3.5" fill="#555"/>
+            <circle cx="196" cy="113" r="7" fill="#1A1A1A"/><circle cx="196" cy="113" r="3.5" fill="#555"/>
+          </g>
+          <!-- Sinal de trânsito -->
+          <rect x="8" y="50" width="6" height="62" fill="#555" rx="2"/>
+          <rect x="4" y="46" width="14" height="30" fill="#333" rx="3"/>
+          <circle cx="11" cy="53" r="4" fill="#FF4444"><animate attributeName="opacity" values="1;0.3;1" dur="1.2s" repeatCount="indefinite"/></circle>
+          <circle cx="11" cy="64" r="4" fill="#888"/>
+          <circle cx="11" cy="74" r="4" fill="#888"/>
+          <!-- Texto -->
+          <text x="110" y="168" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="13" fill="#E8650A" letter-spacing="2">AFONSO PENA</text>
+        </svg>`
+      },
+
+      // 3. Torresmo sendo cortado
+      {
+        frase: 'Fritando um torresmo crocante...',
+        svg: `<svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+          <!-- frigideira -->
+          <ellipse cx="110" cy="148" rx="72" ry="14" fill="#555" opacity="0.6"/>
+          <ellipse cx="110" cy="140" rx="70" ry="13" fill="#3A2800"/>
+          <rect x="40" y="128" width="140" height="16" fill="#5C3A1E" rx="6"/>
+          <!-- cabo da frigideira -->
+          <rect x="170" y="130" width="44" height="10" fill="#3A2800" rx="5"/>
+          <!-- gordura fervendo -->
+          <ellipse cx="110" cy="130" rx="60" ry="6" fill="#C87F00" opacity="0.7"/>
+          <!-- bolhinhas de gordura -->
+          <circle cx="80"  cy="128" r="3" fill="rgba(255,200,100,0.7)" style="animation:bolhaFlutua 1.2s ease-in-out 0s infinite"/>
+          <circle cx="110" cy="125" r="4" fill="rgba(255,200,100,0.6)" style="animation:bolhaFlutua 1.6s ease-in-out 0.4s infinite"/>
+          <circle cx="140" cy="128" r="3" fill="rgba(255,200,100,0.7)" style="animation:bolhaFlutua 1s ease-in-out 0.8s infinite"/>
+          <circle cx="95"  cy="132" r="2" fill="rgba(255,210,80,0.5)"  style="animation:bolhaFlutua 1.8s ease-in-out 0.2s infinite"/>
+          <!-- torresmo -->
+          <g style="animation:torresmoGira 1.2s ease-in-out infinite alternate">
+            <path d="M80 80 Q90 60 110 65 Q130 60 140 80 Q148 100 135 118 Q120 130 100 128 Q80 125 72 108 Q68 94 80 80Z" fill="#8B4513"/>
+            <path d="M85 85 Q95 68 112 72 Q128 68 136 85 Q142 103 130 116 Q116 125 98 122 Q80 120 75 106 Q72 95 85 85Z" fill="#A0522D"/>
+            <!-- textura crocante -->
+            <path d="M90 90 Q100 82 115 86 Q125 82 130 92" fill="none" stroke="#6B3410" stroke-width="2" stroke-linecap="round"/>
+            <path d="M85 105 Q95 98 108 100 Q120 98 128 106" fill="none" stroke="#6B3410" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="105" cy="95"  r="4" fill="#6B3410" opacity="0.6"/>
+            <circle cx="118" cy="105" r="3" fill="#6B3410" opacity="0.5"/>
+          </g>
+          <!-- vaporzinho -->
+          <path d="M100 58 Q103 46 100 36" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="3" stroke-linecap="round" style="animation:fumaçaSobe 1.8s ease-out 0s infinite"/>
+          <path d="M115 55 Q118 43 115 33" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2.5" stroke-linecap="round" style="animation:fumaçaSobe 1.8s ease-out 0.5s infinite"/>
+          <path d="M128 60 Q131 48 128 38" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" style="animation:fumaçaSobe 1.8s ease-out 1s infinite"/>
+          <!-- faca -->
+          <g transform="rotate(-35 145 60)">
+            <rect x="138" y="32" width="5" height="40" fill="#CCC" rx="1"/>
+            <rect x="137" y="30" width="7" height="6" fill="#888" rx="1"/>
+            <rect x="136" y="24" width="9" height="8" fill="#5C3A1E" rx="2"/>
+          </g>
+          <text x="110" y="172" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="13" fill="#E8650A" letter-spacing="2">PETISCO DE BH</text>
+        </svg>`
+      },
+
+      // 4. Pão de queijo assando
+      {
+        frase: 'Saindo o pão de queijo quentinho...',
+        svg: `<svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+          <!-- forno -->
+          <rect x="30" y="90" width="160" height="70" fill="#5C3A1E" rx="10"/>
+          <rect x="38" y="98" width="144" height="54" fill="#3A1800" rx="8"/>
+          <!-- porta do forno com vidro -->
+          <rect x="50" y="102" width="120" height="46" fill="#2A1000" rx="6"/>
+          <rect x="54" y="106" width="112" height="38" fill="#1A0800" rx="4" opacity="0.8"/>
+          <!-- reflexo do forno -->
+          <rect x="56" y="108" width="30" height="2" fill="rgba(232,101,10,0.4)" rx="1"/>
+          <!-- calor dentro do forno -->
+          <rect x="54" y="106" width="112" height="38" fill="rgba(232,101,10,0.08)" rx="4">
+            <animate attributeName="opacity" values="0.08;0.18;0.08" dur="1.5s" repeatCount="indefinite"/>
+          </rect>
+          <!-- pão de queijo 1 -->
+          <g style="animation:pqjIncha 1.6s ease-in-out 0s infinite">
+            <ellipse cx="80" cy="128" rx="18" ry="14" fill="#D4A017"/>
+            <ellipse cx="80" cy="124" rx="16" ry="12" fill="#E8B820"/>
+            <path d="M68 124 Q80 116 92 124" fill="none" stroke="#C4900A" stroke-width="1.5"/>
+          </g>
+          <!-- pão de queijo 2 -->
+          <g style="animation:pqjIncha 1.6s ease-in-out 0.4s infinite">
+            <ellipse cx="120" cy="130" rx="20" ry="15" fill="#D4A017"/>
+            <ellipse cx="120" cy="126" rx="18" ry="13" fill="#E8B820"/>
+            <path d="M106 126 Q120 118 134 126" fill="none" stroke="#C4900A" stroke-width="1.5"/>
+          </g>
+          <!-- pão de queijo 3 -->
+          <g style="animation:pqjIncha 1.6s ease-in-out 0.8s infinite">
+            <ellipse cx="158" cy="128" rx="16" ry="13" fill="#D4A017"/>
+            <ellipse cx="158" cy="124" rx="14" ry="11" fill="#E8B820"/>
+            <path d="M147 124 Q158 117 169 124" fill="none" stroke="#C4900A" stroke-width="1.5"/>
+          </g>
+          <!-- maçaneta do forno -->
+          <rect x="95" y="140" width="30" height="6" fill="#888" rx="3"/>
+          <!-- pezinhos do forno -->
+          <rect x="42"  y="157" width="12" height="8" fill="#3A2000" rx="3"/>
+          <rect x="166" y="157" width="12" height="8" fill="#3A2000" rx="3"/>
+          <!-- vapor saindo do topo -->
+          <path d="M75  88 Q78 76 75 64" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="3" stroke-linecap="round" style="animation:fumaçaSobe 2s ease-out 0s infinite"/>
+          <path d="M110 85 Q113 73 110 61" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="2.5" stroke-linecap="round" style="animation:fumaçaSobe 2s ease-out 0.6s infinite"/>
+          <path d="M145 88 Q148 76 145 64" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" style="animation:fumaçaSobe 2s ease-out 1.2s infinite"/>
+          <text x="110" y="175" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="13" fill="#E8650A" letter-spacing="2">MINEIRIDADE</text>
+        </svg>`
+      },
+
+      // 5. Cafezinho sendo servido
+      {
+        frase: 'Preparando o cafezinho da hora...',
+        svg: `<svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+          <!-- xícara -->
+          <path d="M72 110 L82 155 L138 155 L148 110 Z" fill="#3A1800"/>
+          <ellipse cx="110" cy="110" rx="40" ry="10" fill="#2A1000"/>
+          <!-- pires -->
+          <ellipse cx="110" cy="157" rx="50" ry="8" fill="#5C3A1E"/>
+          <ellipse cx="110" cy="155" rx="48" ry="6" fill="#6B4423"/>
+          <!-- alça da xícara -->
+          <path d="M148 120 Q166 120 166 135 Q166 148 148 148" fill="none" stroke="#5C3A1E" stroke-width="5" stroke-linecap="round"/>
+          <!-- café dentro -->
+          <path d="M76 115 L84 150 L136 150 L144 115 Z" fill="#1A0800"/>
+          <ellipse cx="110" cy="115" rx="36" ry="8" fill="#2D1400"/>
+          <!-- reflexo do café -->
+          <ellipse cx="100" cy="114" rx="14" ry="3" fill="rgba(255,255,255,0.06)" transform="rotate(-10 100 114)"/>
+          <!-- colher -->
+          <line x1="130" y1="100" x2="118" y2="148" stroke="#CCC" stroke-width="3" stroke-linecap="round"/>
+          <ellipse cx="130" cy="98" rx="8" ry="5" fill="#DDD" transform="rotate(-20 130 98)"/>
+          <!-- vapor do café -->
+          <path d="M90  105 Q94 90 90  76" fill="none" stroke="rgba(255,255,255,0.45)" stroke-width="3" stroke-linecap="round" style="animation:fumaçaSobe 1.8s ease-out 0s infinite"/>
+          <path d="M108 102 Q112 87 108 73" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2.5" stroke-linecap="round" style="animation:fumaçaSobe 1.8s ease-out 0.5s infinite"/>
+          <path d="M124 105 Q128 90 124 76" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="2" stroke-linecap="round" style="animation:fumaçaSobe 1.8s ease-out 1s infinite"/>
+          <!-- gotinha caindo da xícara imaginária acima -->
+          <circle cx="110" cy="55" r="4" fill="#3D1800" style="animation:cafeCai 1.5s ease-in 0s infinite"/>
+          <circle cx="118" cy="55" r="3" fill="#3D1800" style="animation:cafeCai 1.5s ease-in 0.4s infinite"/>
+          <text x="110" y="175" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="13" fill="#E8650A" letter-spacing="2">CAFÉ MINEIRO</text>
+        </svg>`
+      },
+
+      // 6. Placa de boteco balançando
+      {
+        frase: 'Encontrando o boteco perfeito...',
+        svg: `<svg viewBox="0 0 220 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+          <!-- poste -->
+          <rect x="107" y="20" width="6" height="90" fill="#888" rx="2"/>
+          <rect x="107" y="20" width="60" height="6" fill="#888" rx="2"/>
+          <!-- corrente esquerda -->
+          <line x1="115" y1="26" x2="72"  y2="50" stroke="#AAA" stroke-width="2"/>
+          <!-- corrente direita -->
+          <line x1="163" y1="26" x2="150" y2="50" stroke="#AAA" stroke-width="2"/>
+          <!-- placa animada -->
+          <g style="animation:placaBalanc 2s ease-in-out infinite;transform-origin:135px 26px">
+            <!-- sombra da placa -->
+            <rect x="65" y="54" width="94" height="62" rx="8" fill="rgba(0,0,0,0.3)" transform="translate(3,3)"/>
+            <!-- placa fundo -->
+            <rect x="65" y="50" width="94" height="62" rx="8" fill="#3D1F0F"/>
+            <rect x="68" y="53" width="88" height="56" rx="6" fill="#5C2E00"/>
+            <!-- borda decorativa -->
+            <rect x="70" y="55" width="84" height="52" rx="5" fill="none" stroke="#E8650A" stroke-width="1.5" stroke-dasharray="4,3"/>
+            <!-- estrela CDB -->
+            <text x="112" y="73" text-anchor="middle" font-size="11" fill="#F5A623">★</text>
+            <!-- nome do boteco -->
+            <text x="112" y="88" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="16" fill="#E8650A" letter-spacing="2">TRILHA BH</text>
+            <!-- subtexto -->
+            <text x="112" y="100" text-anchor="middle" font-family="Nunito,sans-serif" font-size="8" fill="rgba(255,255,255,0.6)" font-weight="700" letter-spacing="1">TOUR GASTRONÔMICO</text>
+            <!-- ícone de garrafa -->
+            <text x="112" y="114" text-anchor="middle" font-size="12" fill="#E8650A">🍺</text>
+          </g>
+          <!-- balcão do bar -->
+          <rect x="20" y="145" width="180" height="20" fill="#5C3A1E" rx="4"/>
+          <rect x="20" y="143" width="180" height="6"  fill="#6B4423" rx="3"/>
+          <!-- copos no balcão -->
+          <path d="M45 130 L50 143 L60 143 L65 130Z" fill="#D4A017" opacity="0.7"/>
+          <ellipse cx="55" cy="130" rx="10" ry="3" fill="#F5C842" opacity="0.5"/>
+          <path d="M155 128 L160 143 L172 143 L177 128Z" fill="rgba(255,255,255,0.2)"/>
+          <ellipse cx="166" cy="128" rx="11" ry="3" fill="rgba(255,255,255,0.15)"/>
+          <text x="110" y="175" text-anchor="middle" font-family="Bebas Neue,cursive" font-size="13" fill="#E8650A" letter-spacing="2">BOTECO DE BH</text>
+        </svg>`
+      },
+    ];
+
+    let cenaAtual = Math.floor(Math.random() * CENAS.length);
+    let progresso = 0;
+
+    const elCena  = document.getElementById('splashCena');
+    const elFrase = document.getElementById('splashFrase');
+    const elBarra = document.getElementById('splashBarra');
+
+    function mostrarCena(idx, fadeIn) {
+      const c = CENAS[idx];
+      if (fadeIn) {
+        elCena.style.animation  = 'splashFadeIn 0.5s cubic-bezier(0.22,1,0.36,1) both';
+        elFrase.style.animation = 'splashFraseIn 0.5s cubic-bezier(0.22,1,0.36,1) 0.15s both';
+      }
+      elCena.innerHTML  = c.svg;
+      elFrase.textContent = c.frase;
+    }
+
+    function avancar() {
+      // Fade out
+      elCena.style.animation  = 'splashFadeOut 0.35s ease both';
+      elFrase.style.animation = 'splashFadeOut 0.25s ease both';
+      setTimeout(() => {
+        cenaAtual = (cenaAtual + 1) % CENAS.length;
+        mostrarCena(cenaAtual, true);
+      }, 380);
+    }
+
+    // Mostra primeira cena
+    mostrarCena(cenaAtual, true);
+
+    // Troca a cada 2.8s
+    const intervalo = setInterval(avancar, 2800);
+
+    // Barra de progresso cresce enquanto carrega (simulada)
+    const barraTimer = setInterval(() => {
+      progresso = Math.min(progresso + (Math.random() * 4 + 1), 88);
+      elBarra.style.width = progresso + '%';
+    }, 180);
+
+    // Quando o splash for removido, para os timers
+    const observer = new MutationObserver(() => {
+      if (!document.getElementById('splashApp')) {
+        clearInterval(intervalo);
+        clearInterval(barraTimer);
+        observer.disconnect();
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Quando o app carregar, completa a barra
+    window._splashCompleto = function() {
+      clearInterval(barraTimer);
+      elBarra.style.transition = 'width 0.4s ease';
+      elBarra.style.width = '100%';
+    };
+  })();
+  </script>
+
+<div id="app" style="display:none">
+  <header class="header">
+    <div>
+  <img src="images/logo.png" style="height:36px"/>
+  <div id="headerProgresso" style="display:none;font-size:0.62rem;color:var(--cinza);font-weight:700;margin-top:-4px"><span id="headerPct" style="color:var(--laranja);font-weight:800"></span> da trilha explorada</div>
+</div>
+    <div class="user-info">
+      <!-- botão clicável: avatar + nome -->
+      <button class="header-user-btn" id="headerUserBtn"
+              onclick="document.getElementById('headerDropdown').classList.toggle('open')"
+              aria-label="Menu do usuário">
+        <div id="headerAvatar" class="header-avatar"></div>
+        <span class="user-name" id="headerNome"></span>
+        <i class="ph ph-caret-down header-caret"></i>
+      </button>
+      <!-- dropdown -->
+      <div id="headerDropdown" class="header-dropdown">
+        <button id="btnAdmin" onclick="window.abrirAdmin()"
+                style="display:none" class="header-dropdown-item header-dropdown-admin">
+          <i class="ph-fill ph-shield"></i> Admin
+        </button>
+        <button class="header-dropdown-item" onclick="window.fazerLogout()">
+          <i class="ph ph-sign-out"></i> Sair
+        </button>
+      </div>
+    </div>
+  </header>
+  <div class="page active" id="page-descobrir">
+  <div id="descobrirConteudo"><div class="empty"><div class="empty-icon"><i class="ph ph-spinner"></i></div><p>Carregando...</p></div></div>
+</div>
+<div class="page" id="page-mapa">
+  <div class="toggle-vista">
+    <button class="ativo" id="btnVistaLista" onclick="window.setVistaProximos('lista')"><i class="ph ph-clipboard-text"></i> Lista</button>
+    <button class="inativo" id="btnVistaMapa" onclick="window.setVistaProximos('mapa')"><i class="ph ph-map-trifold"></i> Mapa</button>
+  </div>
+  <div id="proximosConteudo"><div class="empty"><div class="empty-icon"><i class="ph ph-map-pin"></i></div><p>Carregando...</p></div></div>
+  <div id="mapaLeaflet" style="display:none"></div>
+</div>
+<div class="page" id="page-feed">
+  <div class="search-box" style="margin-bottom:10px">
+    <span class="icon"><i class="ph ph-magnifying-glass"></i></span>
+    <input type="text" id="feedBusca" placeholder="Buscar no feed..." oninput="window.filtrarFeed()"/>
+  </div>
+  <div class="filtro-global-btn">
+    <button class="ativo" id="btnFeedGlobal" onclick="window.setFeedFiltro('global')"><i class="ph ph-globe"></i> Todos</button>
+    <button class="inativo" id="btnFeedGrupo" onclick="window.setFeedFiltro('grupo')"><i class="ph ph-users"></i> Grupo</button>
+  </div>
+  <div id="feedLista"><div class="empty"><div class="empty-icon"><i class="ph ph-spinner"></i></div><p>Carregando feed...</p></div></div>
+</div>
+<div class="page" id="page-roteiros">
+  <div id="roteiroConteudo"></div>
+</div>
+<div class="page" id="page-downloads">
+  <button class="btn-voltar-perfil" onclick="window.irPara('perfil')" style="margin-bottom: 16px;">← Voltar ao Perfil</button>
+  <div id="downloadsConteudo"></div>
+</div>
+<div class="page" id="page-perfil">
+  <div class="perfil-card">
+    <div class="perfil-avatar" id="perfilAvatar" onclick="window.abrirEdicaoAvatar()" style="cursor:pointer"><i class="ph ph-compass"></i></div>
+    <div class="perfil-nome" id="perfilNome" style="cursor:pointer" onclick="window.editarNome()"></div>
+    <div class="perfil-email" id="perfilEmail"></div>
+    <button id="btnCompartilharPerfil" onclick="window.compartilharPerfil()" style="margin-bottom:12px;padding:7px 18px;border-radius:14px;background:transparent;color:var(--laranja);border:1px solid var(--laranja);font-size:0.78rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif"><i class="ph ph-share-network"></i> Compartilhar perfil</button>
+    <div id="perfilTelefone" style="font-size:0.78rem;color:var(--cinza);margin-bottom:16px;cursor:pointer"></div>
+    <div class="stats-grid">
+      <div class="stat-item"><div class="stat-val" id="statVisitas">0</div><div class="stat-label">Bares descobertos</div></div>
+      <div class="stat-item"><div class="stat-val" id="statMedia">-</div><div class="stat-label">Nota média</div></div>
+      <div class="stat-item"><div class="stat-val" id="statKm">0</div><div class="stat-label">Km rodados</div></div>
+    </div>
+    <button onclick="window.abrirCadastroBar()" style="width:100%;padding:11px;border-radius:12px;background:#3D1F0F;color:#FDF8F3;border:none;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:'Nunito',sans-serif;margin-top:4px">+ sugerir um bar desconhecido</button>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:16px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px">
+    <button onclick="window.setAbaPerfil('stats')" id="abaStats" style="flex-shrink:0;padding:8px 16px;border-radius:20px;background:var(--primaria);color:white;border:1px solid var(--primaria);font-size:0.78rem;font-weight:700;cursor:pointer;"><i class="ph ph-chart-bar"></i> Stats</button>
+    <button onclick="window.setAbaPerfil('emblemas')" id="abaEmblemas" style="flex-shrink:0;padding:8px 16px;border-radius:20px;background:transparent;color:var(--primaria);border:1px solid var(--primaria);font-size:0.78rem;font-weight:700;cursor:pointer;"><i class="ph ph-medal"></i> Conquistas</button>
+    <button onclick="window.setAbaPerfil('grupo')" id="abaGrupo" style="flex-shrink:0;padding:8px 16px;border-radius:20px;background:transparent;color:var(--primaria);border:1px solid var(--primaria);font-size:0.78rem;font-weight:700;cursor:pointer;"><i class="ph ph-users"></i> Grupo</button>
+    <button onclick="window.setAbaPerfil('config')" id="abaConfig" style="flex-shrink:0;padding:8px 16px;border-radius:20px;background:transparent;color:var(--primaria);border:1px solid var(--primaria);font-size:0.78rem;font-weight:700;cursor:pointer;"><i class="ph ph-gear"></i> Config</button>
+  </div>
+  <div id="abaPerfilConteudo"></div>
+</div>
+  <div id="perfilPublicoPage">
+    <button class="btn-voltar-perfil" onclick="window.fecharPerfilPublico()">← Voltar</button>
+    <div id="perfilPublicoConteudo"></div>
+  </div>
+   <button class="fab-roleta" onclick="window.sortearBar()" id="btnRoleta" style="display:none;">
+    <i class="ph ph-dice-three"></i>
+  </button>
+  <div class="sheet-overlay" id="sheetOverlay" onclick="window.fecharBottomSheet()"></div>
+  <div class="bottom-sheet" id="bottomSheet"></div>
+  <button id="btnTopo" onclick="window.scrollTo({top:0,behavior:'smooth'})" style="position:fixed;bottom:calc(var(--nav-height) + 12px);right:16px;width:44px;height:44px;border-radius:50%;background:var(--marrom);color:white;border:none;font-size:1.2rem;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:100">↑</button>
+  <nav class="bottom-nav">
+    <div class="nav-item active" onclick="window.irPara('descobrir')" style="position:relative">
+      <i class="ph ph-compass"></i>
+      <span id="navBadgeDescobrir" style="display:none;position:absolute;top:8px;right:8px;background:#E8650A;color:white;font-size:0.55rem;font-weight:800;padding:1px 5px;border-radius:10px;font-family:'Nunito',sans-serif;pointer-events:none"></span>
+      <span>Descobrir</span>
+    </div>
+    <div class="nav-item" onclick="window.irPara('mapa')">
+      <i class="ph ph-map-pin"></i><span>Mapa</span>
+    </div>
+    <div class="nav-item" onclick="window.irPara('feed');document.getElementById('feedDot')?.remove()" style="position:relative">
+      <i class="ph ph-users"></i>
+      <span id="feedDot" style="display:none;position:absolute;top:6px;right:18px;width:8px;height:8px;border-radius:50%;background:#E8650A;border:2px solid white"></span>
+      <span>Feed</span>
+    </div>
+    <div class="nav-item" onclick="window.irPara('roteiros')">
+      <i class="ph ph-map-trifold"></i><span>Roteiros</span>
+    </div>
+    <div class="nav-item" onclick="window.irPara('perfil')">
+      <i class="ph ph-user"></i><span>Perfil</span>
+    </div>
+  </nav>
+</div>
+</div>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+<script src="js/splash.js"></script>
+<script src="js/trilhas.js"></script>
+<script src="js/data.js"></script>
+<script src="js/config.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/app.js"></script>
+<script src="js/nav.js"></script>
+<script src="js/avaliacao.js"></script>
+<script src="js/verificacao.js"></script>
+<script src="js/ranking_temporal.js"></script>
+<script src="js/descobrir.js"></script>
+<script src="js/mapa.js"></script>
+<script src="js/feed.js"></script>
+<script src="js/roteiro.js"></script>
+<script src="js/perfil.js"></script>
+<script src="js/eventos.js"></script>
+<script src="js/admin.js"></script>
+<script src="js/auth.js"></script>
+<script>
+let regiaoFiltro="TODOS",buscaTexto="",cardAberto=null,rankingAtivo=0,gruposAtual=[],grupoAtual=null,vistaGlobal=true,feedFiltro='global',grupoSelecionado=null,feedEventosCache=[],paginaAnterior=null,filtroVisita='todos';
+let meusLikes={};
+let favoritos=[];
+let usuarioAtual=null;
+let visitas={};
+let extras=[];
+let BARES=window.BARES_ESTATICO||[];
+
+window.toggleModoBoemia = function() {
+  const body = document.body;
+  body.classList.toggle('modo-boemia');
+  const isDark = body.classList.contains('modo-boemia');
+  localStorage.setItem('modo_boemia', isDark ? '1' : '0');
+  localStorage.setItem('modo_boemia_manual', '1');
+  setTimeout(() => {
+    window.mostrarNotif(isDark ? '<i class="ph ph-moon"></i> Modo Boemia ativado!' : '<i class="ph ph-sun"></i> Modo Dia ativado!');
+  }, 50);
+  const abaAtual = window.APP?.abaPerfilAtiva;
+  if (abaAtual && document.getElementById('perfilAbaConteudo')) {
+    window._setAbaPerfilAtiva(abaAtual);
+  }
+};
+if(localStorage.getItem('modo_boemia') === '1') document.body.classList.add('modo-boemia');
+
+function checarModoBoemiaPorHorario() {
+  if (localStorage.getItem('modo_boemia_manual') === '1') return;
+  const agora = new Date();
+  const hora = agora.getHours();
+  const minuto = agora.getMinutes();
+  const totalMin = hora * 60 + minuto;
+
+  const ligarStr = localStorage.getItem('boemia_ligar') || '18:00';
+  const desligarStr = localStorage.getItem('boemia_desligar') || '06:00';
+  const [lH, lM] = ligarStr.split(':').map(Number);
+  const [dH, dM] = desligarStr.split(':').map(Number);
+  const ligarMin = lH * 60 + lM;
+  const desligarMin = dH * 60 + dM;
+  let deveSerBoemia;
+  if (ligarMin > desligarMin) {
+    deveSerBoemia = totalMin >= ligarMin || totalMin < desligarMin;
+  } else {
+    deveSerBoemia = totalMin >= ligarMin && totalMin < desligarMin;
+  }
+
+  const isBoemia = document.body.classList.contains('modo-boemia');
+  if (deveSerBoemia && !isBoemia) document.body.classList.add('modo-boemia');
+  else if (!deveSerBoemia && isBoemia) document.body.classList.remove('modo-boemia');
+}
+checarModoBoemiaPorHorario();
+setInterval(checarModoBoemiaPorHorario, 60 * 1000);
+
+let _cacheVisitasGrupo=null;
+let _cacheVisitasGrupoTs=0;
+const _VISITAS_GRUPO_TTL=3*60*1000;
+function renderFiltros(){
+  const regioes=['TODOS','SUL','CENTRO','LESTE','NORDESTE','NOROESTE','NORTE','OESTE'];
+  document.getElementById('filtrosRegiao').innerHTML=regioes.map(r=>{
+    if(r==='TODOS'){
+      const totalFalta=BARES.filter(b=>!visitas[b.id]).length;
+      return`<button class="filtro-btn ${r===regiaoFiltro?'active':''}" onclick="window.setRegiao('${r}')">TODOS <span style="font-size:0.65rem;opacity:0.8">${totalFalta} faltam</span></button>`;
+    }
+    const totalRegiao=BARES.filter(b=>b.regiao===r).length;
+    const visitadosRegiao=BARES.filter(b=>b.regiao===r&&visitas[b.id]).length;
+    const faltam=totalRegiao-visitadosRegiao;
+    const completa=faltam===0;
+    return`<button class="filtro-btn ${r===regiaoFiltro?'active':''}" onclick="window.setRegiao('${r}')">${completa?'<i class="ph-fill ph-check-circle"></i>':''} ${r} <span style="font-size:0.65rem;opacity:0.8">${completa?'completa':faltam+' faltam'}</span></button>`;
+   }).join('');
+}
+window.setFiltroVisita=function(f){
+  filtroVisita=f;
+  if(!document.getElementById('filtroTodos'))return;
+  document.getElementById('filtroTodos').style.background=f==='todos'?'var(--marrom)':'transparent';
+  document.getElementById('filtroTodos').style.color=f==='todos'?'white':'var(--marrom)';
+  document.getElementById('filtroNaoVisitados').style.background=f==='nao'?'var(--marrom)':'transparent';
+  document.getElementById('filtroNaoVisitados').style.color=f==='nao'?'white':'var(--marrom)';
+  document.getElementById('filtroVisitados').style.background=f==='sim'?'var(--marrom)':'transparent';
+  document.getElementById('filtroVisitados').style.color=f==='sim'?'white':'var(--marrom)';
+  renderBares();
+};
+window.setRegiao=function(r){regiaoFiltro=r;filtroVisita='todos';renderFiltros();renderBares();window.setFiltroVisita('todos');};
+window.filtrarBares=function(){
+  buscaTexto=document.getElementById('buscaInput').value.toLowerCase();
+  if(buscaTexto)filtroVisita='todos';
+  clearTimeout(window._debounceSearch);
+  window._debounceSearch=setTimeout(()=>{
+    if(buscaTexto)window.setFiltroVisita('todos');
+    renderBares();
+  },400);
+};
+window.abrirFormDesc=function(barId){const form=document.getElementById('desc-form-'+barId);form.style.display=form.style.display==='none'?'block':'none';};
+
+window.setNotaExtra=function(barId,n){
+  if(!window._notaExtra)window._notaExtra={};
+  window._notaExtra[barId]=n;
+  document.querySelectorAll(`#stars-extra-${barId} .estrela`).forEach((el,i)=>el.classList.toggle('on',i<n));
+};
+window.salvarVisitaExtra=async function(barId){
+  if(!usuarioAtual)return;
+  const nota=window._notaExtra?.[barId]||0;
+ const comentario=filtrarTexto(document.getElementById('comment-extra-'+barId)?.value||'');
+  const d={nota,comentario,ts:Date.now()};
+  await db.collection('users').doc(usuarioAtual.uid).collection('visits').doc(barId).collection('historico').add(d);
+  if(comentario){
+    await db.collection('comentarios').doc(barId).collection('posts').add({uid:usuarioAtual.uid,nome:usuarioAtual.displayName||'Anônimo',texto:comentario,nota,ts:Date.now()});
+  }
+  if(!window._historico)window._historico={};
+  if(!window._historico[barId])window._historico[barId]=[];
+  window._historico[barId].unshift(d);
+  if(window._notaExtra)window._notaExtra[barId]=0;
+  document.getElementById('comment-extra-'+barId).value='';
+  mostrarNotif('<i class="ph-fill ph-check-circle"></i> Visita extra registrada!');
+  renderBares();
+};
+window.toggleCard=function(id){
+  const info=document.getElementById('info-'+id);
+  const isOpen=info.style.display!=='none';
+  if(cardAberto&&cardAberto!==id){const prev=document.getElementById('info-'+cardAberto);if(prev)prev.style.display='none';}
+  info.style.display=isOpen?'none':'block';
+  cardAberto=isOpen?null:id;
+};
+window.setNota=function(id,n){
+  if(!visitas[id])visitas[id]={visitado:true,ts:Date.now()};
+  visitas[id].nota=n;
+  document.querySelectorAll(`#stars-${id} .estrela`).forEach((el,i)=>el.classList.toggle('on',i<n));
+};
+window.salvarDesc=async function(barId){
+  const txt=document.getElementById('desc-txt-'+barId)?.value.trim();
+  if(!txt||txt.length<10){mostrarNotif('Descrição muito curta!');return;}
+  if(txt.length>200){mostrarNotif('Máximo 200 caracteres');return;}
+  const nome=usuarioAtual.displayName||'Anônimo';
+  await db.collection('descricoes').doc(barId).set({texto:txt,autor:nome,uid:usuarioAtual.uid,ts:Date.now()});
+  if(!window._descMap)window._descMap={};
+  window._descMap[barId]={texto:txt,autor:nome,ts:Date.now()};
+  localStorage.removeItem('descMap');
+  document.getElementById('desc-form-'+barId).style.display='none';
+  document.getElementById('desc-txt-'+barId).value='';
+  mostrarNotif('<i class="ph-fill ph-check-circle"></i> Descrição salva!');
+};
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').then(reg => {
+
+    // Verifica update a cada 60 segundos
+    setInterval(() => reg.update(), 60 * 1000);
+
+    // Quando encontra versão nova
+    reg.addEventListener('updatefound', () => {
+      const novo = reg.installing;
+      novo.addEventListener('statechange', () => {
+        if (novo.state === 'installed' && navigator.serviceWorker.controller) {
+          // Manda o novo SW ativar imediatamente
+          novo.postMessage('SKIP_WAITING');
+        }
+      });
+    });
+
+  });
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    window.location.reload();
+  });
+}
+
+let _ptrStart = 0;
+document.addEventListener('touchstart', e => {
+  // No Safari, usa o scroll do elemento ativo, não window.scrollY
+  const pAtiva = document.querySelector('.page.active');
+  const scrollTopo = pAtiva ? pAtiva.scrollTop === 0 : window.scrollY === 0;
+  if(scrollTopo) _ptrStart = e.touches[0].clientY;
+  else _ptrStart = 0;
+}, {passive:true});
+
+document.addEventListener('touchend', e => {
+  if(!_ptrStart) return;
+  const pAtivaId = document.querySelector('.page.active')?.id;
+  if(pAtivaId === 'page-mapa') { _ptrStart = 0; return; }
+  const dy = e.changedTouches[0].clientY - _ptrStart;
+  if(dy > 100){
+    window.mostrarNotif('<i class="ph ph-arrows-clockwise"></i> Atualizando...');
+    if(pAtivaId === 'page-feed')      renderFeedLista(window.APP?.feedFiltro || 'global');
+    if(pAtivaId === 'page-descobrir') renderListaDescobrir();
+    if(pAtivaId === 'page-perfil')    renderPerfil();
+  }
+  _ptrStart = 0;
+}, {passive:true});
+</script>
+</body>
+</html>
