@@ -1,0 +1,15 @@
+{
+  "name": "trilhabh-api",
+  "compatibility_date": "2026-06-27",
+  "main": "worker/index.js",
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "550bf7dbf0a14aa2abe4cf9bcf1df46a"
+    }
+  ],
+  "vars": {
+    "SUPABASE_URL": "https://mnlpdcmvvyafrfvqvqoo.supabase.co",
+    "FIREBASE_PROJECT_ID": "trilhabh01"
+  }
+}
