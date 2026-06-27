@@ -21,22 +21,37 @@ function json(data, status = 200) {
 async function getBares(env) {
   const cached = await env.KV.get('bares_cache', { type: 'json' });
   if (cached) return json(cached);
-const res = await fetch(
-  `${env.SUPABASE_URL}/rest/v1/bares?ativo=eq.true&select=*&order=nome.asc&limit=2000`,
-  {
-    headers: {
-      'apikey': env.SUPABASE_SERVICE_KEY,
-      'Authorization': `Bearer ${env.SUPABASE_SERVICE_KEY}`,
-      'Content-Type': 'application/json',
-      'Range': '0-1999',
-      'Prefer': 'count=none',
-    },
+
+  let todos = [];
+  let offset = 0;
+  const limite = 1000;
+
+  while (true) {
+    const res = await fetch(
+      `${env.SUPABASE_URL}/rest/v1/bares?ativo=eq.true&select=*&order=nome.asc&limit=${limite}&offset=${offset}`,
+      {
+        headers: {
+          'apikey': env.SUPABASE_SERVICE_KEY,
+          'Authorization': `Bearer ${env.SUPABASE_SERVICE_KEY}`,
+          'Content-Type': 'application/json',
+        },
+      }
+    );
+
+    if (!res.ok) break;
+
+    const lote = await res.json();
+    todos = todos.concat(lote);
+
+    if (lote.length < limite) break;
+    offset += limite;
   }
-);
-  if (!res.ok) return json({ erro: 'Erro ao buscar bares' }, 500);
-  const bares = await res.json();
-  await env.KV.put('bares_cache', JSON.stringify(bares), { expirationTtl: 600 });
-  return json(bares);
+
+  if (!todos.length) return json({ erro: 'Erro ao buscar bares' }, 500);
+
+  await env.KV.put('bares_cache', JSON.stringify(todos), { expirationTtl: 600 });
+
+  return json(todos);
 }
 
 async function postCheckin(request, env) {
