@@ -8,6 +8,15 @@
 };
 
 if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+window.getTokenAtualizado = async function() {
+  const user = auth.currentUser;
+  if (!user) return null;
+  try {
+    return await user.getIdToken();
+  } catch {
+    return null;
+  }
+};
 const db   = firebase.firestore();
 const auth = firebase.auth();
 const storage = firebase.storage();

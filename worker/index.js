@@ -1,3 +1,23 @@
+async function verificarToken(request, env) {
+  const auth = request.headers.get('Authorization') || '';
+  const token = auth.replace('Bearer ', '').trim();
+  if (!token) return null;
+
+  try {
+    const partes = token.split('.');
+    if (partes.length !== 3) return null;
+
+    const payload = JSON.parse(atob(partes[1].replace(/-/g, '+').replace(/_/g, '/')));
+
+    const agora = Math.floor(Date.now() / 1000);
+    if (payload.exp < agora) return null;
+    if (payload.aud !== env.FIREBASE_PROJECT_ID) return null;
+
+    return payload;
+  } catch {
+    return null;
+  }
+}
 const CORS_HEADERS = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
@@ -54,11 +74,13 @@ async function getBares(env) {
   return json(todos);
 }
 
-async function postCheckin(request, env) {
+async function postCheckin(request, env, usuario) {
   const body = await request.json();
-  if (!body.barId || !body.userId) {
-    return json({ erro: 'barId e userId são obrigatórios' }, 400);
-  }
+
+  if (!body.barId) return json({ erro: 'barId é obrigatório' }, 400);
+
+  const userId = usuario.uid;
+
   const res = await fetch(
     `${env.SUPABASE_URL}/rest/v1/checkins`,
     {
@@ -70,23 +92,24 @@ async function postCheckin(request, env) {
         'Prefer': 'return=representation',
       },
       body: JSON.stringify({
-        user_id: body.userId,
-        bar_id:  body.barId,
-        nota:    body.nota || null,
-        km:      body.km || null,
-        gasto:   body.gasto || null,
+        user_id:    userId,
+        bar_id:     body.barId,
+        nota:       body.nota || null,
+        km:         body.km || null,
+        gasto:      body.gasto || null,
         comentario: body.comentario || null,
       }),
     }
   );
+
   if (!res.ok) {
     const err = await res.json();
     return json({ erro: err.message || 'Erro ao registrar checkin' }, 500);
   }
+
   await env.KV.delete('bares_cache');
   return json({ sucesso: true });
 }
-
 async function postAvaliacao(request, env) {
   const body = await request.json();
   if (!body.barId || !body.userId) {
@@ -143,12 +166,18 @@ export default {
     const url = new URL(request.url);
     const path = url.pathname;
     const method = request.method;
+
     if (method === 'OPTIONS') return handleOptions();
+
     if (path === '/ping') return json({ ok: true });
-    if (path === '/bares'    && method === 'GET')  return getBares(env);
-    if (path === '/checkin'  && method === 'POST') return postCheckin(request, env);
-    if (path === '/avaliacao'&& method === 'POST') return postAvaliacao(request, env);
-    if (path === '/ranking'  && method === 'GET')  return getRanking(request, env);
+    if (path === '/bares' && method === 'GET') return getBares(env);
+    if (path === '/ranking' && method === 'GET') return getRanking(request, env);
+
+    const usuario = await verificarToken(request, env);
+    if (!usuario) return json({ erro: 'Não autorizado' }, 401);
+
+    if (path === '/checkin'   && method === 'POST') return postCheckin(request, env, usuario);
+    if (path === '/avaliacao' && method === 'POST') return postAvaliacao(request, env, usuario);
 
     return json({ erro: 'Rota não encontrada' }, 404);
   },
