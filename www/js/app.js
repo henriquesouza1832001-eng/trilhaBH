@@ -118,18 +118,23 @@ async function _salvarDadosVisita(id, prefixo) {
   const comentario = filtrarTexto(document.getElementById(prefixo + 'comment-' + id)?.value || '');
   const d = { visitado: true, nota, km, valor, comentario, ts: visitas[id]?.ts || Date.now() };
   await db.collection('users').doc(usuarioAtual.uid).collection('visits').doc(id).set(d);
+  window.getTokenAtualizado().then(token => {
+  if (!token) return;
   fetch(`${WORKER_URL}/checkin`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
+    },
     body: JSON.stringify({
       barId: id,
-      userId: usuarioAtual.uid,
       nota: nota || null,
       km: km || null,
       gasto: valor || null,
       comentario: comentario || null,
     }),
-  }).catch(() => {}); 
+  }).catch(() => {});
+});
   visitas[id] = d;
   salvarCache('visitas_' + usuarioAtual.uid, visitas);
   return d;
