@@ -111,27 +111,27 @@ async function buscarDadosBares(){
   salvarCache('descMap',descMap);
   renderBares();
 }
-async function _salvarDadosVisita(id,prefixo){
-  const nota=visitas[id]?.nota||0;
-  if(nota===0){mostrarNotif('<i class="ph-fill ph-star"></i> Dê pelo menos nota 1 para salvar!');return false;}
-  const km=parseFloat(document.getElementById('km-'+prefixo+id)?.value)||0;
-  const comentario=filtrarTexto(document.getElementById('comment-'+prefixo+id)?.value||'');
-  const valor=parseFloat(document.getElementById('valor-'+prefixo+id)?.value)||0;
-  const d={visitado:true,nota,km,valor,comentario,ts:visitas[id]?.ts||Date.now()};
+async function _salvarDadosVisita(id, prefixo) {
+  const nota = visitas[id]?.nota || 0;
+  const km = parseFloat(document.getElementById(prefixo + 'km-' + id)?.value || 0) || 0;
+  const valor = parseFloat(document.getElementById(prefixo + 'valor-' + id)?.value || 0) || 0;
+  const comentario = filtrarTexto(document.getElementById(prefixo + 'comment-' + id)?.value || '');
+  const d = { visitado: true, nota, km, valor, comentario, ts: visitas[id]?.ts || Date.now() };
   await db.collection('users').doc(usuarioAtual.uid).collection('visits').doc(id).set(d);
-  if(comentario){
-  await db.collection('comentarios').doc(id).collection('posts').add({uid:usuarioAtual.uid,nome:usuarioAtual.displayName||'Anônimo',texto:comentario,nota,ts:Date.now()});
-const resumoRef=db.collection('comentarios').doc('resumo');
-  const postsAtualizados=await db.collection('comentarios').doc(id)
-    .collection('posts').orderBy('ts','desc').limit(10).get();
-  const resumoSnap=await resumoRef.get();
-  const resumoAtual=resumoSnap.exists?resumoSnap.data():{};
-  resumoAtual[id]=postsAtualizados.docs.map(d=>({...d.data(),docId:d.id}));
-  await resumoRef.set(resumoAtual);
-  localStorage.removeItem('commMap');
-}
-  visitas[id]=d;
-  salvarCache('visitas_'+usuarioAtual.uid,visitas);
+  fetch(`${WORKER_URL}/checkin`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      barId: id,
+      userId: usuarioAtual.uid,
+      nota: nota || null,
+      km: km || null,
+      gasto: valor || null,
+      comentario: comentario || null,
+    }),
+  }).catch(() => {}); 
+  visitas[id] = d;
+  salvarCache('visitas_' + usuarioAtual.uid, visitas);
   return d;
 }
 async function verificarUltrapassagem(){
