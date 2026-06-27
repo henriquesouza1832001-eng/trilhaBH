@@ -1,4 +1,5 @@
-﻿const APP_VERSION = '1.0.1.7';
+﻿const WORKER_URL = 'https://trilhabh-api.amstel-bh.workers.dev';
+const APP_VERSION = '1.0.1.7';
 const _vKey = 'app_version';
 if (localStorage.getItem(_vKey) !== APP_VERSION) {
   const keysParaManter = [
